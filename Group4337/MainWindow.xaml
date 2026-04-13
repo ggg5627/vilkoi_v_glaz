@@ -2,14 +2,13 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Инструментальные Средства Разработки Программного Обеспечения" 
-        Height="700" Width="800">
+        Height="800" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Заголовок -->
         <TextBlock Text="Студенты группы 4337"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
@@ -18,11 +17,9 @@
                    Grid.Row="0" 
                    Margin="0,10"/>
 
-        <!-- Список кнопок -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
             <Grid>
                 <Grid.RowDefinitions>
-                    <!-- 25 строк для студентов + 2 для импорта/экспорта -->
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -49,12 +46,11 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition Height="Auto"/>
-                    <!-- Импорт -->
                     <RowDefinition Height="Auto"/>
-                    <!-- Экспорт -->
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- 🔹 ВАША КНОПКА (замените Grid.Row на ваш номер−1) -->
                 <TextBlock Grid.Row="0" 
                    Text="Гайфуллина Раида" 
                    FontSize="18" 
@@ -72,8 +68,8 @@
                    Text="Группа 4337" 
                    FontSize="15"
                    Foreground="#34495E"/>
+                
 
-                <!-- 🔹 Кнопки для Варианта 6 -->
                 <Button Grid.Row="25" 
                         Content="📥 Импорт данных" 
                         HorizontalAlignment="Left" 
@@ -96,7 +92,27 @@
                         FontWeight="Bold"
                         Click="BtnExport_Click"/>
 
-                <!-- Остальные студенты... (оставьте как было) -->
+                <Button Grid.Row="27" 
+        Content="📥 Импорт JSON данных" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,8,0,4"
+        Width="180"
+        Background="#E67E22"
+        Foreground="White"
+        FontWeight="Bold"
+        Click="BtnImportJson_Click"/>
+
+                <Button Grid.Row="28" 
+        Content="📤 Экспорт в Word" 
+        HorizontalAlignment="Left" 
+        VerticalAlignment="Center"
+        Margin="15,4,0,8"
+        Width="180"
+        Background="#8E44AD"
+        Foreground="White"
+        FontWeight="Bold"
+        Click="BtnExportWord_Click"/>
 
             </Grid>
         </ScrollViewer>

@@ -9,12 +9,9 @@ namespace Group4337
         public MainWindow()
         {
             InitializeComponent();
-            // Инициализация БД при запуске
             DatabaseHelper.Initialize();
         }
-       
 
-        // 🔹 Импорт из 3.xlsx (Вариант 6)
         private void BtnImport_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new OpenFileDialog
@@ -27,23 +24,18 @@ namespace Group4337
             {
                 try
                 {
-                    // Очищаем таблицу перед новым импортом (опционально)
                     DatabaseHelper.ClearTable();
-
-                    // Читаем Excel
                     var clients = ExcelHelper.ImportFromExcel(dlg.FileName);
-
-                    // Сохраняем в БД
                     DatabaseHelper.SaveClients(clients);
 
-                    MessageBox.Show($"Успешно импортировано {clients.Count} записей!",
+                    MessageBox.Show($"✅ Успешно импортировано {clients.Count} записей из Excel!",
                         "Импорт завершён",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show($"Ошибка импорта: {ex.Message}",
+                    MessageBox.Show($"❌ Ошибка импорта: {ex.Message}",
                         "Ошибка",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);
@@ -51,13 +43,12 @@ namespace Group4337
             }
         }
 
-        // 🔹 Экспорт в Excel с группировкой по улице (Вариант 6)
         private void BtnExport_Click(object sender, RoutedEventArgs e)
         {
             var dlg = new SaveFileDialog
             {
                 Filter = "Excel Files|*.xlsx",
-                FileName = "Export_Variant6_Gayfullina.xlsx",
+                FileName = "Export_Variant6_Excel.xlsx",
                 Title = "Сохранить результат экспорта"
             };
 
@@ -65,31 +56,104 @@ namespace Group4337
             {
                 try
                 {
-                    // Читаем данные из БД
                     var clients = DatabaseHelper.GetAllClients();
 
                     if (clients.Count == 0)
                     {
-                        MessageBox.Show("База данных пуста. Сначала выполните импорт.",
+                        MessageBox.Show("⚠️ База данных пуста. Сначала выполните импорт.",
                             "Внимание",
                             MessageBoxButton.OK,
                             MessageBoxImage.Warning);
                         return;
                     }
 
-                    // Экспортируем с группировкой
                     ExcelHelper.ExportToExcel(clients, dlg.FileName);
 
-                    MessageBox.Show($"Данные экспортированы в {dlg.FileName}\n" +
-                        $"• Группировка: по улице проживания\n" +
-                        $"• Сортировка: ФИО по алфавиту",
+                    MessageBox.Show($"✅ Данные экспортированы в Excel: {dlg.FileName}",
                         "Экспорт завершён",
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show($"Ошибка экспорта: {ex.Message}",
+                    MessageBox.Show($"❌ Ошибка экспорта: {ex.Message}",
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void BtnImportJson_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new OpenFileDialog
+            {
+                Filter = "JSON Files|*.json",
+                Title = "Выберите файл 3.json"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                try
+                {
+                    DatabaseHelper.ClearTable();
+
+                    var clients = JsonHelper.ImportFromJson(dlg.FileName);
+
+                    DatabaseHelper.SaveClients(clients);
+
+                    MessageBox.Show($"✅ Успешно импортировано {clients.Count} записей из JSON!",
+                        "Импорт завершён",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"❌ Ошибка импорта: {ex.Message}",
+                        "Ошибка",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void BtnExportWord_Click(object sender, RoutedEventArgs e)
+        {
+            var dlg = new SaveFileDialog
+            {
+                Filter = "Word Files|*.docx",
+                FileName = "Export_Variant6_Word.docx",
+                Title = "Сохранить результат экспорта в Word"
+            };
+
+            if (dlg.ShowDialog() == true)
+            {
+                try
+                {
+                    var clients = DatabaseHelper.GetAllClients();
+
+                    if (clients.Count == 0)
+                    {
+                        MessageBox.Show("⚠️ База данных пуста. Сначала выполните импорт.",
+                            "Внимание",
+                            MessageBoxButton.OK,
+                            MessageBoxImage.Warning);
+                        return;
+                    }
+
+                    JsonHelper.ExportToWord(clients, dlg.FileName);
+
+                    MessageBox.Show($"✅ Данные экспортированы в Word: {dlg.FileName}\n\n" +
+                        $"• Группировка: по улице проживания\n" +
+                        $"• Сортировка: ФИО по алфавиту\n" +
+                        $"• Каждая улица на отдельной странице",
+                        "Экспорт завершён",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                }
+                catch (System.Exception ex)
+                {
+                    MessageBox.Show($"❌ Ошибка экспорта: {ex.Message}",
                         "Ошибка",
                         MessageBoxButton.OK,
                         MessageBoxImage.Error);

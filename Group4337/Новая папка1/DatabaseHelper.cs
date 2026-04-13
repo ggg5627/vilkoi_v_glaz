@@ -37,7 +37,6 @@ namespace Group4337.Новая_папка1
 
                 using var cmd = new SqliteCommand(sql, conn, tran);
 
-                // ✅ ВАЖНО: AddWithValue должен быть ВНУТРИ цикла
                 cmd.Parameters.AddWithValue("@cc", c.ClientCode ?? "");
                 cmd.Parameters.AddWithValue("@fn", c.FullName ?? "");
                 cmd.Parameters.AddWithValue("@em", c.Email ?? "");
