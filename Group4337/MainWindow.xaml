@@ -1,60 +1,104 @@
 ﻿<Window x:Class="Group4337.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Group4337"
-        mc:Ignorable="d"
         Title="Инструментальные Средства Разработки Программного Обеспечения" 
-        Height="700" 
-        Width="800">
+        Height="700" Width="800">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <TextBlock Text="Студенты группы 4337"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center"
-                       FontSize="15px" 
-                       Grid.Row="0" />
+        <!-- Заголовок -->
+        <TextBlock Text="Студенты группы 4337"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="16" 
+                   FontWeight="Bold"
+                   Grid.Row="0" 
+                   Margin="0,10"/>
 
-            <Grid Grid.Row="1">
+        <!-- Список кнопок -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
-                    <RowDefinition />
+                    <!-- 25 строк для студентов + 2 для импорта/экспорта -->
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Импорт -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Экспорт -->
                 </Grid.RowDefinitions>
 
-                <!-- Места для добавления элементов управления -->
+                <!-- 🔹 ВАША КНОПКА (замените Grid.Row на ваш номер−1) -->
+                <TextBlock Grid.Row="0" 
+                   Text="Гайфуллина Раида" 
+                   FontSize="18" 
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   Margin="0,0,0,12"/>
 
-                <!---->
+                <TextBlock Grid.Row="1" 
+                   Text="18 лет" 
+                   FontSize="15"
+                   Foreground="#34495E"
+                   Margin="0,0,0,8"/>
+
+                <TextBlock Grid.Row="2" 
+                   Text="Группа 4337" 
+                   FontSize="15"
+                   Foreground="#34495E"/>
+
+                <!-- 🔹 Кнопки для Варианта 6 -->
+                <Button Grid.Row="25" 
+                        Content="📥 Импорт данных" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="15,8,0,4"
+                        Width="150"
+                        Background="#27AE60"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Click="BtnImport_Click"/>
+
+                <Button Grid.Row="26" 
+                        Content="📤 Экспорт в Excel" 
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Center"
+                        Margin="15,4,0,8"
+                        Width="150"
+                        Background="#2980B9"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Click="BtnExport_Click"/>
+
+                <!-- Остальные студенты... (оставьте как было) -->
 
             </Grid>
-        </Grid>
+        </ScrollViewer>
     </Grid>
 </Window>
